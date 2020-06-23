@@ -1,0 +1,26 @@
+﻿<Window x:Class="Dziennik_Żywieniowy.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dziennik_Żywieniowy"
+        mc:Ignorable="d"
+        Title="Login" Height="600" Width="800" WindowStartupLocation="CenterScreen" >
+    <Window.Background>
+        <ImageBrush ImageSource="logimage2.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Border Background="#CFD4DA" CornerRadius="20" Margin="270,125,270,100" BorderBrush="#FF686868" BorderThickness="1">
+            <StackPanel Margin="15">
+                <Label Content="Login" Foreground="White" FontSize="40" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
+                <Separator Background="White"></Separator>
+                <Label Content="Username" FontFamily="Century Gothic" Foreground="White" FontSize="20"/>
+                <TextBox x:Name="txt_Username" FontSize="18"></TextBox>
+                <Label Content="Password" Foreground="White" FontFamily="Century Gothic" FontSize="20" />
+                <PasswordBox x:Name="txt_Password" FontSize= "18"></PasswordBox>
+                <Button x:Name="btn_Submit" Content="Submit" Margin="0,20,0,10" HorizontalAlignment="Center" Width="140" Height="30" FontSize="20" FontFamily="Century gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="btn_Submit_Click_1"/>
+                <Button x:Name="btn_Registration" Content="Registration" Margin="0,10,0,0" HorizontalAlignment="Center" Width="140" Height="30" FontSize="20" FontFamily="Century gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="btn_Registration_Click_1"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
