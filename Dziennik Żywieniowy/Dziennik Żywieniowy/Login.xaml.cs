@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,18 +27,51 @@ namespace Dziennik_Żywieniowy
         private void btn_Registration_Click_1(object sender, RoutedEventArgs e)
         {
             Registration reg = new Registration();
-            //this.Hide();
             reg.chbox_L.IsChecked = true;
             reg.chbox_Man.IsChecked = true;
             reg.ShowDialog();
         }
         private void btn_Submit_Click_1(object sender, RoutedEventArgs e)
         {
-            if (true)
+            WelcomeWindow main = new WelcomeWindow();
+          
+            if (txt_Username.Text.Length < 1  || txt_Password.Password.Length < 1)
             {
-                UserWindow main = new UserWindow();
-                Close();
-                main.ShowDialog();
+                MessageBoxResult msg = MessageBox.Show("Please insert login and password", "FoodDiary", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                if (msg != MessageBoxResult.OK)
+                {
+                    Close();
+                    main.ShowDialog();
+                }
+            }
+            else
+            {
+                string sql = "SELECT COUNT(*) FROM Users WHERE Username = @user AND Password = HASHBYTES('SHA1','@password')";
+                var command = new SqlCommand(sql, DBconnection.Connection());
+                command.Parameters.AddWithValue("@user", txt_Username.Text);
+                command.Parameters.AddWithValue("@password", txt_Password.Password);
+
+                int results = (int)command.ExecuteScalar();
+                if (results > 0)
+                {
+                    UserWindow userwindow = new UserWindow();
+                 //   UserName_model.username = txt_Username.Text;
+                    DBconnection.Connection_Close(DBconnection.Connection());
+                    Close();
+                    MessageBoxResult result = MessageBox.Show("Succesful log in", "FoodDiary",MessageBoxButton.OK,MessageBoxImage.Information);
+                    userwindow = new UserWindow();
+                    userwindow.ShowDialog();
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("Wrong login or password", "FoodDiary", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    if (result != MessageBoxResult.OK)
+                    {
+                        DBconnection.Connection_Close(DBconnection.Connection());
+                        Close();
+                        main.ShowDialog();
+                    }
+                }
             }
         }
     }

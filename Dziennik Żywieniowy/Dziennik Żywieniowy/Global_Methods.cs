@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Dziennik_Żywieniowy
 {
@@ -13,6 +14,12 @@ namespace Dziennik_Żywieniowy
         public static bool IsTextAllowed(string text)
         {
             return _regex.IsMatch(text);
+        }
+        public static void Exit_method()
+        {
+            List<Window> windows = new List<Window>();
+            windows = Application.Current.Windows.OfType<Window>().ToList();
+            windows.ForEach(x => x.Close());
         }
     }
 }

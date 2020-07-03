@@ -1,0 +1,21 @@
+﻿<Window x:Class="Dziennik_Żywieniowy.Add_Product"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dziennik_Żywieniowy"
+        mc:Ignorable="d"
+        Title="Add_Product" Height="350" Width="500" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Canvas Margin="0,0,-0.4,-0.2">
+            <Label Content="If you can't find your product, please add him" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="70" Canvas.Top="85"/>
+            <TextBox Height="22" TextWrapping="Wrap" Width="248" Canvas.Left="126" Canvas.Top="121"/>
+            <Label Content="Search :" FontSize="12" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="67" Canvas.Top="118"/>
+            <Label Content="Add product to yours FoodDiary" FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Canvas.Left="85" Canvas.Top="20"/>
+            <TextBlock x:Name="txt_block" Canvas.Left="22" TextWrapping="Wrap" Text="TextBlock" Canvas.Top="169" Height="129" Width="103"/>
+        </Canvas>
+        <DataGrid x:Name="Products" Canvas.Left="126" Canvas.Top="148" Width="248" Margin="127,144,118.6,18.8" >
+
+        </DataGrid>
+    </Grid>
+</Window>

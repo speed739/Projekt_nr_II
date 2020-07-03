@@ -15,7 +15,7 @@
                 <Label Content="Login" Foreground="White" FontSize="40" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
                 <Separator Background="White"></Separator>
                 <Label Content="Username" FontFamily="Century Gothic" Foreground="White" FontSize="20"/>
-                <TextBox x:Name="txt_Username" FontSize="18"></TextBox>
+                <TextBox x:Name="txt_Username" FontSize="18" Text="{Binding Username, UpdateSourceTrigger = PropertyChanged}" ></TextBox>
                 <Label Content="Password" Foreground="White" FontFamily="Century Gothic" FontSize="20" />
                 <PasswordBox x:Name="txt_Password" FontSize= "18"></PasswordBox>
                 <Button x:Name="btn_Submit" Content="Submit" Margin="0,20,0,10" HorizontalAlignment="Center" Width="140" Height="30" FontSize="20" FontFamily="Century gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="btn_Submit_Click_1"/>
