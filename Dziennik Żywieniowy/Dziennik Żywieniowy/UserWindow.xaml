@@ -26,7 +26,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label  x:Name="username"    Content="TEST"     Grid.Column="0" Grid.Row="1"    FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
+        <Label  x:Name="username"  HorizontalAlignment="Center"  Content="TEST"     Grid.Column="0" Grid.Row="1"     FontSize="20" FontFamily="Century Gothic" Background="{x:Null}" BorderBrush="#FF9B9595" Foreground="#FF020202"/>
         <Button x:Name="add_Product" Content="Add Product" Grid.Column="0" Grid.Row="2"  FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="add_Product_Click"/>
         <Button x:Name="settings"    Content="Settings" Grid.Column="0" Grid.Row="3"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="settings_Click"/>
         <Button x:Name="log_out"     Content="Log out"  Grid.Column="0" Grid.Row="4"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="log_out_Click" />

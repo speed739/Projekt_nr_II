@@ -104,6 +104,11 @@ namespace Dziennik_Żywieniowy
             return result;
         }
         private void btn_exit_Click(object sender, RoutedEventArgs e) => Global_Methods.Exit_method();
+
+        private void Button_Back_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
         private void btn_registration_Click(object sender, RoutedEventArgs e)
         {
             if (Check_login() == true && Check_password() == true && Check_required_fields() == true)

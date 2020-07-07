@@ -15,6 +15,9 @@ namespace Dziennik_Żywieniowy
         {
             return _regex.IsMatch(text);
         }
+        public static string username;
+        public static decimal chartvalue;
+
         public static void Exit_method()
         {
             List<Window> windows = new List<Window>();

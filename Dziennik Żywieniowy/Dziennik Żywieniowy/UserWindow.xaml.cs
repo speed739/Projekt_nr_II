@@ -25,17 +25,23 @@ namespace Dziennik_Żywieniowy
         public UserWindow()
         {
             InitializeComponent();
-            //Username.Content = UserName.username;
+            username.Content = Global_Methods.username;
+            UpdateChartsValues();
         }
 
+        private void UpdateChartsValues()
+        {
+           
+
+        }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Global_Methods.Exit_method();
         }
         private void log_out_Click(object sender, RoutedEventArgs e)
         {
-            Close();
             Login log = new Login();
+            Close();
             log.ShowDialog();
         }
         private void settings_Click(object sender, RoutedEventArgs e)
@@ -48,10 +54,7 @@ namespace Dziennik_Żywieniowy
         {
             Add_Product add_Product = new Add_Product();
             add_Product.ShowDialog();
+            half_dounat_chart.Value = (double)Global_Methods.chartvalue * 100;
         }
-    
-        
-    
     }
-
 }

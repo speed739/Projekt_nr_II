@@ -55,10 +55,9 @@ namespace Dziennik_Żywieniowy
                 if (results > 0)
                 {
                     UserWindow userwindow = new UserWindow();
-                 //   UserName_model.username = txt_Username.Text;
+                    Global_Methods.username = txt_Username.Text;
                     DBconnection.Connection_Close(DBconnection.Connection());
                     Close();
-                    MessageBoxResult result = MessageBox.Show("Succesful log in", "FoodDiary",MessageBoxButton.OK,MessageBoxImage.Information);
                     userwindow = new UserWindow();
                     userwindow.ShowDialog();
                 }
