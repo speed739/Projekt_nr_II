@@ -76,6 +76,7 @@ namespace Dziennik_Żywieniowy
                 command.Parameters.AddWithValue("@user", txt_user.Text);
 
                 int results = (int)command.ExecuteScalar();
+                DBconnection.Connection_Close(DBconnection.Connection());
                 if (results > 0)
                 {
                     MessageBox.Show("Username is taken, please change it ", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -98,12 +99,16 @@ namespace Dziennik_Żywieniowy
             bool result = true;
             textBoxes_list.ForEach(x =>
             {
-                if (x.Text.Length < 1)
+                if (x.Text.Length == 0)
                     result = false;
             });
             return result;
         }
         private void btn_exit_Click(object sender, RoutedEventArgs e) => Global_Methods.Exit_method();
+        private void btn_back_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
         private void btn_registration_Click(object sender, RoutedEventArgs e)
         {
             if (Check_login() == true && Check_password() == true && Check_required_fields() == true)
@@ -123,7 +128,7 @@ namespace Dziennik_Żywieniowy
         }
         private void Create()
         {
-            string sql = "INSERT INTO FoodDiary.dbo.Users(Username,Password,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR)" +
+            string sql = "INSERT INTO Users(Username,Password,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR)" +
                 "VALUES (@user,HASHBYTES('SHA1','@password'),@weight,@height,@sex,@age,@active,@bmi,@bmr)";
             var command = new SqlCommand(sql, DBconnection.Connection());
             command.Parameters.AddWithValue("@user", txt_user.Text);
@@ -136,6 +141,11 @@ namespace Dziennik_Żywieniowy
             command.Parameters.AddWithValue("@bmi", bmi);
             command.Parameters.AddWithValue("@bmr", bmr);
             command.ExecuteNonQuery();
+
+            string sql1 = "INSERT INTO Diary(ID_User) VALUES (@id)";
+            var command1 = new SqlCommand(sql1, DBconnection.Connection());
+            command1.Parameters.AddWithValue("@id", Global_Methods.ReturnID_User(txt_user.Text));
+            command1.ExecuteNonQuery();
 
             DBconnection.Connection_Close(DBconnection.Connection());
         }

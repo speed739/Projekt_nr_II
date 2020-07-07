@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -13,37 +14,46 @@ namespace Dziennik_Żywieniowy
     public class UserName_model : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private string password;
-        private float weight, height, bmi, bmr;
-        private int age;
-        public string username
-        {
-            get
-            {
-                return username;
-            }
-            set
-            {
-                if (username != value)
-                {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Username"));
-                    username = value;
-                }
-            }
-        }
-        public UserName_model Return_info()
+        public string Username, ActivityLevel,Sex;
+        public double  Weight, Height;
+        public decimal BMI, BMR;
+        public int ID_User,Age;
+        
+        //public string username
+        //{
+        //    get
+        //    {
+        //        return username;
+        //    }
+        //    set
+        //    {
+        //        if (username != value)
+        //        {
+        //            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Username"));
+        //            username = value;
+        //        }
+        //    }
+        //}
+        public UserName_model Return_info(string username)
         {
             UserName_model user = new UserName_model();
-            string sql = "SELECT Weight,Height,Age FROM Users WHERE Username = @user";
+            string sql = "SELECT ID_User,Username,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR FROM Users WHERE Username = @user";
             var command = new SqlCommand(sql, DBconnection.Connection());
             command.Parameters.AddWithValue("@user", username);
             SqlDataReader reader = command.ExecuteReader();
-
+            DBconnection.Connection_Close(DBconnection.Connection());
+            
             while (reader.Read()) 
             {
-                user.weight = reader.GetFloat(0);
-                user.height = reader.GetFloat(1);
-                user.age = reader.GetInt32(2);
+                user.ID_User = reader.GetInt32(0);
+                user.Username = reader.GetString(1);
+                user.Weight = reader.GetDouble(2);
+                user.Height = reader.GetDouble(3);
+                user.Sex = reader.GetString(4);
+                user.Age = reader.GetByte(5);
+                user.ActivityLevel = reader.GetString(6);
+                user.BMI = reader.GetDecimal(7);
+                user.BMR = reader.GetDecimal(8);
             }
             return user;
         }

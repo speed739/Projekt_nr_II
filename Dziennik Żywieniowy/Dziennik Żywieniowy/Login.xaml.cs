@@ -33,13 +33,12 @@ namespace Dziennik_Żywieniowy
         }
         private void btn_Submit_Click_1(object sender, RoutedEventArgs e)
         {
-            WelcomeWindow main = new WelcomeWindow();
-          
             if (txt_Username.Text.Length < 1  || txt_Password.Password.Length < 1)
             {
                 MessageBoxResult msg = MessageBox.Show("Please insert login and password", "FoodDiary", MessageBoxButton.OKCancel, MessageBoxImage.Information);
                 if (msg != MessageBoxResult.OK)
                 {
+                    WelcomeWindow main = new WelcomeWindow();
                     Close();
                     main.ShowDialog();
                 }
@@ -54,12 +53,10 @@ namespace Dziennik_Żywieniowy
                 int results = (int)command.ExecuteScalar();
                 if (results > 0)
                 {
-                    UserWindow userwindow = new UserWindow();
-                 //   UserName_model.username = txt_Username.Text;
+                    Global_Methods.username = txt_Username.Text;
                     DBconnection.Connection_Close(DBconnection.Connection());
+                    UserWindow userwindow = new UserWindow();
                     Close();
-                    MessageBoxResult result = MessageBox.Show("Succesful log in", "FoodDiary",MessageBoxButton.OK,MessageBoxImage.Information);
-                    userwindow = new UserWindow();
                     userwindow.ShowDialog();
                 }
                 else
@@ -68,6 +65,7 @@ namespace Dziennik_Żywieniowy
                     if (result != MessageBoxResult.OK)
                     {
                         DBconnection.Connection_Close(DBconnection.Connection());
+                        WelcomeWindow main = new WelcomeWindow();
                         Close();
                         main.ShowDialog();
                     }
