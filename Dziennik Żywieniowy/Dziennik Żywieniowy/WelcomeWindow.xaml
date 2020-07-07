@@ -8,7 +8,7 @@
         Title="FoodDiary" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Images/backgroud.jpg"/>
+            <ImageBrush ImageSource="backgroud.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "20" />

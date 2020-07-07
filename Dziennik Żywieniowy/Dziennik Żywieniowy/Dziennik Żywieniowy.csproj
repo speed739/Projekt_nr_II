@@ -155,19 +155,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="backgroud.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\backgroud.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Registration.jpg" />
+    <Resource Include="logimage2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Registration.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\logimage2.jpg" />
+    <Resource Include="Images\userwin.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\userThem.jpg" />
+    <Resource Include="Images\UserWindow Them.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

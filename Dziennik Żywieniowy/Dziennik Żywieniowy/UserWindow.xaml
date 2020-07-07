@@ -8,10 +8,10 @@
         mc:Ignorable="d"
         Title="UserWindow" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <ImageBrush ImageSource="/Images/userThem.jpg"/>
+        <ImageBrush ImageSource="C:\Users\Grzesiek\source\repos\Projekt_nr_II\Dziennik Żywieniowy\Dziennik Żywieniowy\Images\UserWindow Them.jpg"/>
     </Window.Background>
 
-    <Grid RenderTransformOrigin="0.574,0.517" >
+    <Grid RenderTransformOrigin="0.574,0.517">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "150"/>
             <ColumnDefinition Width = "auto"/>
@@ -26,7 +26,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label  x:Name="username"     Content="TEST" HorizontalAlignment="Center" Background="#FFBBDFFF"  Grid.Column="0" Grid.Row="1" FontSize="20" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" />
+        <Label  x:Name="username"    Content="TEST"     Grid.Column="0" Grid.Row="1"    FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
         <Button x:Name="add_Product" Content="Add Product" Grid.Column="0" Grid.Row="2"  FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="add_Product_Click"/>
         <Button x:Name="settings"    Content="Settings" Grid.Column="0" Grid.Row="3"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="settings_Click"/>
         <Button x:Name="log_out"     Content="Log out"  Grid.Column="0" Grid.Row="4"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="log_out_Click" />
@@ -36,27 +36,13 @@
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
+                    <RotateTransform Angle="-0.123"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Canvas.RenderTransform>
-            <lvc:PieChart x:Name="Pie_chart" LegendLocation="Bottom"  Hoverable="False" DataTooltip="{x:Null}" Canvas.Left="348" Height="205" Width="313" Loaded="Charts_Loaded" AutomationProperties.IsRequiredForForm="True" Foreground="Black" ScrollBarFill="#1E443131" Canvas.Top="-1">
-                <lvc:PieChart.Series>
-                    <lvc:PieSeries x:Name="part_green"    Title="Lean body mass"  Values="0"  DataLabels="True" Foreground="#FFFFFEFC">
-                        <lvc:PieSeries.Fill>
-                            <SolidColorBrush Color="#FF61EC53" Opacity="1"/>
-                        </lvc:PieSeries.Fill>
-                    </lvc:PieSeries>
-                    <lvc:PieSeries x:Name="part_yellow"  Title="Fat"  Values="0"  DataLabels="True">
-                        <lvc:PieSeries.Fill>
-                            <SolidColorBrush Color="#FFD8D829" Opacity="1"/>
-                        </lvc:PieSeries.Fill>
-                    </lvc:PieSeries>
-                </lvc:PieChart.Series>
-            </lvc:PieChart>
-
             <lvc:Gauge x:Name="half_dounat_chart"
                    From="0" To="100" Value="00"
-                   LabelsVisibility="Collapsed" Height="118" Width="288" RenderTransformOrigin="0.5,0.5" Canvas.Left="23" Canvas.Top="55">
+                   LabelsVisibility="Collapsed" Height="118" Width="288" RenderTransformOrigin="0.5,0.5" Canvas.Left="-4" Canvas.Top="-2">
                 <lvc:Gauge.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -73,9 +59,8 @@
                     </LinearGradientBrush>
                 </lvc:Gauge.GaugeActiveFill>
             </lvc:Gauge>
-            <Label Content="Daily calories in %" Height="34" FontSize="20" FontFamily="Century Gothic" Canvas.Top="15" Width="183" RenderTransformOrigin="1.093,-0.182" Canvas.Left="81"/>
+            <Label Content="Daily requirement" Height="34" FontSize="20" FontFamily="Century Gothic" Canvas.Left="49" Canvas.Top="113" Width="181" RenderTransformOrigin="1.093,-0.182"/>
         </Canvas>
-        <Label Content="Food Diary" HorizontalAlignment="Left" VerticalAlignment="Top" Height="81" RenderTransformOrigin="9.331,1.8" Grid.Column="2"  FontSize="55" FontFamily="Century Gothic"  Foreground="Black"  Margin="294,10,-151,0" Width="311"/>
-        <Label Content="Body composition in Kg" FontSize="20" FontFamily="Century Gothic" RenderTransformOrigin="1.093,-0.182" Margin="520,53,-304,-68" Grid.Row="6" Grid.Column="2"/>
+        <Label Content="Food Diary" HorizontalAlignment="Left" VerticalAlignment="Top" Height="81" RenderTransformOrigin="9.331,1.8" Grid.Column="2"  FontSize="55" FontFamily="Century Gothic"  Foreground="Black"  Margin="112,12,-225.4,0" Width="311"/>
     </Grid>
 </Window>

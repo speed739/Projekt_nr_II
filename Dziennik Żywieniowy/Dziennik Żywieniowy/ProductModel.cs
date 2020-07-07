@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Xml.Linq;
 
@@ -25,8 +24,6 @@ namespace Dziennik_Żywieniowy
             {
                 reader.Read();
                 id = Convert.ToInt32(reader[0]);
-                DBconnection.Connection_Close(DBconnection.Connection());
-                
                 return id;
             }
         }
@@ -56,8 +53,6 @@ namespace Dziennik_Żywieniowy
                 output.Protein = float.Parse((reader["Protein"]).ToString());
                 output.Carbohydrates = float.Parse((reader["Carbohydrates"]).ToString());
                 output.Fat = float.Parse((reader["Fat"]).ToString());
-                
-                DBconnection.Connection_Close(DBconnection.Connection());
             }
             return output;
         }
