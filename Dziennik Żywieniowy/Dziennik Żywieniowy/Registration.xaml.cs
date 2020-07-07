@@ -128,7 +128,7 @@ namespace Dziennik_Żywieniowy
         }
         private void Create()
         {
-            string sql = "INSERT INTO FoodDiary.dbo.Users(Username,Password,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR)" +
+            string sql = "INSERT INTO Users(Username,Password,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR)" +
                 "VALUES (@user,HASHBYTES('SHA1','@password'),@weight,@height,@sex,@age,@active,@bmi,@bmr)";
             var command = new SqlCommand(sql, DBconnection.Connection());
             command.Parameters.AddWithValue("@user", txt_user.Text);
@@ -142,6 +142,11 @@ namespace Dziennik_Żywieniowy
             command.Parameters.AddWithValue("@bmr", bmr);
             command.ExecuteNonQuery();
 
+            string sql1 = "INSERT INTO Diary(ID_User) VALUES (@id)";
+            var command1 = new SqlCommand(sql1, DBconnection.Connection());
+            command1.Parameters.AddWithValue("@id", Global_Methods.ReturnID_User(txt_user.Text));
+            command1.ExecuteNonQuery();
+            
             DBconnection.Connection_Close(DBconnection.Connection());
         }
         private string Sex_Value()

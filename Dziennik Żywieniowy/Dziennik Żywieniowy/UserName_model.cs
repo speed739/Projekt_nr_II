@@ -36,7 +36,7 @@ namespace Dziennik_Żywieniowy
         public UserName_model Return_info(string username)
         {
             UserName_model user = new UserName_model();
-            string sql = "SELECT ID_User,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR FROM Users WHERE Username = @user";
+            string sql = "SELECT ID_User,Username,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR FROM Users WHERE Username = @user";
             var command = new SqlCommand(sql, DBconnection.Connection());
             command.Parameters.AddWithValue("@user", username);
             SqlDataReader reader = command.ExecuteReader();
@@ -45,13 +45,14 @@ namespace Dziennik_Żywieniowy
             while (reader.Read())
             {
                 user.ID_User = reader.GetInt32(0);
-                user.Weight = reader.GetDouble(1);
-                user.Height = reader.GetDouble(2);
-                user.Sex = reader.GetString(3);
-                user.Age = reader.GetByte(4);
-                user.ActivityLevel = reader.GetString(5);
-                user.BMI = reader.GetDecimal(6);
-                user.BMR = reader.GetDecimal(7);
+                user.Username = reader.GetString(1);
+                user.Weight = reader.GetDouble(2);
+                user.Height = reader.GetDouble(3);
+                user.Sex = reader.GetString(4);
+                user.Age = reader.GetByte(5);
+                user.ActivityLevel = reader.GetString(6);
+                user.BMI = reader.GetDecimal(7);
+                user.BMR = reader.GetDecimal(8);
 
             }
             return user;
