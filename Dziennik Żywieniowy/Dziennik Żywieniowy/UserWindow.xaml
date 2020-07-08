@@ -31,7 +31,7 @@
         <Button x:Name="settings"    Content="Settings" Grid.Column="0" Grid.Row="3"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="settings_Click"/>
         <Button x:Name="log_out"     Content="Log out"  Grid.Column="0" Grid.Row="4"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="log_out_Click" />
         <Button x:Name="exit"        Content="Exit"     Grid.Column="0" Grid.Row="5"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="Exit_Click"/>
-        <Canvas Grid.Column="2" Margin="127,7.2,-409.2,28" Grid.RowSpan="5" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+        <Canvas Grid.Column="2" Margin="127,7,-19,28" Grid.RowSpan="5" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

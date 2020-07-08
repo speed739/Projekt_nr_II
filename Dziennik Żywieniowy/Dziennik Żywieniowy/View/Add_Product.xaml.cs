@@ -78,26 +78,49 @@ namespace Dziennik_Żywieniowy
             }
             else
             {
-                string sql_comm = "INSERT INTO Products(ProductName,Protein,Carbohydrates,Fat,Kcal) VALUES(@p_name,@protein,@carbs,@fat,@kcal)";
-                SqlCommand command = new SqlCommand(sql_comm, DBconnection.Connection());
-                command.Parameters.AddWithValue("@p_name", txt_productname.Text);
-                command.Parameters.AddWithValue("@protein", float.Parse(txt_protein.Text));
-                command.Parameters.AddWithValue("@carbs ", float.Parse(txt_carbohydrates.Text));
-                command.Parameters.AddWithValue("@fat", float.Parse(txt_fat.Text));
-                command.Parameters.AddWithValue("@kcal", float.Parse(txt_kcal.Text));
-                command.ExecuteNonQuery();
-
-                DBconnection.Connection_Close(DBconnection.Connection());
-                MessageBoxResult result = MessageBox.Show("Adding your product is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
-                textBoxes.ForEach(x =>
+                if (CheckProduct(txt_productname.Text) == true)
                 {
-                    if (x.Text.Length > 0)
+                    MessageBox.Show("Product with the given name already exists, change the name or update the existing product", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    string sql_comm = "INSERT INTO Products(ProductName,Protein,Carbohydrates,Fat,Kcal) VALUES(@p_name,@protein,@carbs,@fat,@kcal)";
+                    SqlCommand command = new SqlCommand(sql_comm, DBconnection.Connection());
+                    command.Parameters.AddWithValue("@p_name", txt_productname.Text);
+                    command.Parameters.AddWithValue("@protein", float.Parse(txt_protein.Text));
+                    command.Parameters.AddWithValue("@carbs ", float.Parse(txt_carbohydrates.Text));
+                    command.Parameters.AddWithValue("@fat", float.Parse(txt_fat.Text));
+                    command.Parameters.AddWithValue("@kcal", float.Parse(txt_kcal.Text));
+                    command.ExecuteNonQuery();
+
+                    DBconnection.Connection_Close(DBconnection.Connection());
+                    MessageBoxResult result = MessageBox.Show("Adding your product is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+                    textBoxes.ForEach(x =>
                     {
-                        x.Clear();
-                    }
-                });
-                Fill_data();
+                        if (x.Text.Length > 0)
+                        {
+                            x.Clear();
+                        }
+                    });
+                    Fill_data();
+                }
             }
+        }
+
+        private bool CheckProduct(string productname)
+        {
+            int result;
+            string sql = "SELECT COUNT(*) FROM Products WHERE ProductName = @p_name";
+            SqlCommand command = new SqlCommand(sql, DBconnection.Connection());
+            command.Parameters.AddWithValue("@p_name", productname);
+            result = (int)command.ExecuteScalar();
+            DBconnection.Connection_Close(DBconnection.Connection());
+
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
         }
         private void TextBox_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -196,7 +219,7 @@ namespace Dziennik_Żywieniowy
         private void OnlyNumbers(object sender, TextCompositionEventArgs e) => e.Handled = Global_Methods.IsTextAllowed(e.Text);
         private void Button_UpdateClick(object sender, RoutedEventArgs e)
         {
-            if (Products.SelectedItem == null)
+            if (Products.SelectedItem == null) // jeśli jest coś zaznaczone
             {
                 MessageBox.Show("Please select one, before updating", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -208,21 +231,39 @@ namespace Dziennik_Żywieniowy
                 }
                 else
                 {
-                    string sql_comm = " UPDATE Products SET ProductName = @p_name,Protein = @protein,Carbohydrates = @carbs,Fat = @fat,Kcal = @kcal WHERE ProductName = @old_p_name";
-                    SqlCommand command_delete = new SqlCommand(sql_comm, DBconnection.Connection());
-                    command_delete.Parameters.AddWithValue("@p_name", txt_productname_update.Text);
-                    command_delete.Parameters.AddWithValue("@protein", float.Parse(txt_protein_update.Text));
-                    command_delete.Parameters.AddWithValue("@carbs", float.Parse(txt_carbohydrates_update.Text));
-                    command_delete.Parameters.AddWithValue("@fat", float.Parse(txt_fat_update.Text));
-                    command_delete.Parameters.AddWithValue("@kcal", float.Parse(txt_kcal_update.Text));
-                    command_delete.Parameters.AddWithValue("@old_p_name", product.ProductName);
-                    command_delete.ExecuteNonQuery();
-
-                    DBconnection.Connection_Close(DBconnection.Connection());
-                    MessageBox.Show("Updating product - " + product.ProductName + " is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Fill_data();
+                    if (txt_productname_update.Text == product.ProductName) //czy nazwa produktu pozostała bez zmian
+                    {
+                        Products_Update();
+                    }
+                    else
+                    {
+                        if (CheckProduct(txt_productname_update.Text) == true)
+                        {
+                            MessageBox.Show("Product with the given name already exists ", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            Products_Update();
+                        }
+                    }
                 }
             }
+        }
+        private void Products_Update()
+        {
+            string sql_comm = " UPDATE Products SET ProductName = @p_name,Protein = @protein,Carbohydrates = @carbs,Fat = @fat,Kcal = @kcal WHERE ProductName = @old_p_name";
+            SqlCommand command_update = new SqlCommand(sql_comm, DBconnection.Connection());
+            command_update.Parameters.AddWithValue("@p_name", txt_productname_update.Text);
+            command_update.Parameters.AddWithValue("@protein", float.Parse(txt_protein_update.Text));
+            command_update.Parameters.AddWithValue("@carbs", float.Parse(txt_carbohydrates_update.Text));
+            command_update.Parameters.AddWithValue("@fat", float.Parse(txt_fat_update.Text));
+            command_update.Parameters.AddWithValue("@kcal", float.Parse(txt_kcal_update.Text));
+            command_update.Parameters.AddWithValue("@old_p_name", product.ProductName);
+            command_update.ExecuteNonQuery();
+
+            DBconnection.Connection_Close(DBconnection.Connection());
+            MessageBox.Show("Updating product - " + product.ProductName + " is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+            Fill_data();
         }
     }
 }

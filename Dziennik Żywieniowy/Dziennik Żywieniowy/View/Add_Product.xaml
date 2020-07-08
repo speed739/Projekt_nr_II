@@ -14,7 +14,7 @@
         <Canvas Background="#FFB0AAAA" >
             <Label Content="Add product to your FoodDiary" FontWeight="Bold" FontSize="20" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="90" Canvas.Top="19" RenderTransformOrigin="0.33,0.557"/>
             <Label Content="Add new product to database" FontWeight="Bold" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="622" Canvas.Top="47"/>
-            <Label Content="Search :" FontSize="12" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Top="231" Canvas.Left="-1"/>
+            <Label Content="Search :" FontSize="12" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Top="231" Canvas.Left="4"/>
             <TextBox x:Name="txt_search"  Height="21" TextWrapping="Wrap" Width="170" Canvas.Left="58" Canvas.Top="234" TextChanged="TextBox_Search_TextChanged"/>
             <TextBox x:Name="txt_productname"  Height="24" TextWrapping="Wrap" Width="276" Canvas.Left="604" Canvas.Top="109"/>
             <TextBox x:Name="txt_protein"       Text="0" Height="24" PreviewTextInput="OnlyNumbers" TextWrapping="Wrap"  Width="120" Canvas.Left="604" Canvas.Top="154"/>
@@ -32,7 +32,7 @@
             <Label Content="1. Select product from list below" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="92"/>
             <Label Content="Follow steps :" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="61"/>
             <Label Content="2. Enter the value in grams into the [Weight] field" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="123"/>
-            <Label Content="Weight :" FontSize="12" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="239" Canvas.Top="230"/>
+            <Label Content="Weight :" FontSize="12" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="250" Canvas.Top="230"/>
             <Label Content="3. Click on [Add to diary] button" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="152"/>
             <Label Content="4. If you can't find your product, please add him" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="180"/>
             <Label Content="Update product in database" FontWeight="Bold" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="622" Canvas.Top="308"/>
