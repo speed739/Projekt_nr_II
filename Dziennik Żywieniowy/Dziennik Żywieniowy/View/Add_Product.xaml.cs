@@ -190,6 +190,12 @@ namespace Dziennik_Żywieniowy
         }
         private void Button_BackClick(object sender, RoutedEventArgs e)
         {
+            UpdateChartValues();
+            Close();
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => UpdateChartValues();
+        private void UpdateChartValues()
+        {
             int command_result;
             decimal kcal_value;
             int id_diary = ReturnUserID_Diary();
@@ -209,11 +215,6 @@ namespace Dziennik_Żywieniowy
 
                 DBconnection.Connection_Close(DBconnection.Connection());
                 Global_Methods.chartvalue = kcal_value / user_model.BMR;
-                Close();
-            }
-            else
-            {
-                Close();
             }
         }
         private void OnlyNumbers(object sender, TextCompositionEventArgs e) => e.Handled = Global_Methods.IsTextAllowed(e.Text);
@@ -265,6 +266,7 @@ namespace Dziennik_Żywieniowy
             MessageBox.Show("Updating product - " + product.ProductName + " is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
             Fill_data();
         }
+
     }
 }
 

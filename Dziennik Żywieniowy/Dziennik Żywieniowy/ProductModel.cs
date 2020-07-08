@@ -15,6 +15,7 @@ namespace Dziennik_Żywieniowy
         public float Carbohydrates { get; set; }
         public float Fat { get; set; }
 
+        /*Funkcje poniżej bedą wykorzystywane w przyszłości*/
         private int Get_ID()
         {
             int id;

@@ -52,9 +52,7 @@
                         </lvc:PieSeries.Fill>
                     </lvc:PieSeries>
                 </lvc:PieChart.Series>
-
             </lvc:PieChart>
-
             <lvc:Gauge x:Name="half_dounat_chart"
                        From="0" To="100" Value="00"
                     LabelsVisibility="Collapsed" Height="118" Width="288" RenderTransformOrigin="0.5,0.5" Canvas.Left="-99" Canvas.Top="55" Foreground="White">

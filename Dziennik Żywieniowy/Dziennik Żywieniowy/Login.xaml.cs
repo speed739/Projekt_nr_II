@@ -58,7 +58,6 @@ namespace Dziennik_Żywieniowy
                     UserWindow userwindow = new UserWindow();
                     DBconnection.Connection_Close(DBconnection.Connection());
                     Close();
-                    userwindow = new UserWindow();
                     userwindow.ShowDialog();
                 }
                 else

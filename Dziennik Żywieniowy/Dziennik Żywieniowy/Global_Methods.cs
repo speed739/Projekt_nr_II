@@ -12,13 +12,13 @@ namespace Dziennik_Żywieniowy
     static class Global_Methods
     {
         private static Regex _regex = new Regex("[^0-9,]+");
+        public static string username;
+        public static decimal chartvalue = 0;
+      
         public static bool IsTextAllowed(string text)
         {
             return _regex.IsMatch(text);
         }
-        public static string username;
-        public static decimal chartvalue = 0;
-
         public static void Exit_method()
         {
             List<Window> windows = new List<Window>();

@@ -27,6 +27,7 @@ namespace Dziennik_Żywieniowy
     {
         UserName_model user_model = new UserName_model();
         private double LBM, Fat;
+        int helper = 0; // zmienna pomocnicza do wyswietlania tylko pojedyńczego komunikatu 
         public UserWindow()
         {
             InitializeComponent();
@@ -79,6 +80,7 @@ namespace Dziennik_Żywieniowy
                 kcal_value = (decimal)command_kcal.ExecuteScalar();
                 half_dounat_chart.Value = (double)(kcal_value / user_model.BMR) * 100;
                 half_dounat_chart.Value = Convert.ToDouble(String.Format("{0:0.#}", half_dounat_chart.Value));
+                CompleatDaily();
             }
             else
             {
@@ -97,10 +99,7 @@ namespace Dziennik_Żywieniowy
             }
             UpdateHalfdounat_ChartValues();
         }
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Global_Methods.Exit_method();
-        }
+        private void Exit_Click(object sender, RoutedEventArgs e) => Global_Methods.Exit_method();
         private void log_out_Click(object sender, RoutedEventArgs e)
         {
             Login log = new Login();
@@ -112,13 +111,21 @@ namespace Dziennik_Żywieniowy
             Settings setting = new Settings();
             setting.ShowDialog();
         }
-
         private void add_Product_Click(object sender, RoutedEventArgs e)
         {
             Add_Product add_Product = new Add_Product();
             add_Product.ShowDialog();
             half_dounat_chart.Value = (double)Global_Methods.chartvalue * 100;
             half_dounat_chart.Value = Convert.ToDouble(String.Format("{0:0.#}", half_dounat_chart.Value));
+            CompleatDaily();
+        }
+        private void CompleatDaily()
+        {
+            if (half_dounat_chart.Value >= 100 && helper == 0)
+            {
+                helper = 1;
+                MessageBox.Show("Congratulation !!!  today your daily calories are compleat ", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

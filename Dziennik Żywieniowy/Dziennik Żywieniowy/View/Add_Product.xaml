@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dziennik_Żywieniowy"
         mc:Ignorable="d"
-          Title="FoodDiary"  Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+          Title="FoodDiary"  Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closing="Window_Closing">
     <Window.Background>
         <ImageBrush ImageSource="/Images/Addwindow.jpg"/>
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="821*"/>
+            <ColumnDefinition Width="173*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Canvas>
+        <Canvas Grid.ColumnSpan="2">
             <Label Content="Add product to your FoodDiary" FontWeight="Bold" FontSize="24" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="90" Canvas.Top="19" RenderTransformOrigin="0.33,0.557"/>
             <Label Content="Add new product to database" FontWeight="Bold" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="609" Canvas.Top="47"/>
             <Label Content="Search :" FontSize="14" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Top="230" Canvas.Left="2" FontWeight="Bold"/>
@@ -53,6 +54,6 @@
             <Button Content="Update" Click="Button_UpdateClick" Width="74" Canvas.Left="604" Canvas.Top="497" FontSize="16" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
             <Label Content="If you want to change existing product" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="571" Canvas.Top="276"/>
         </Canvas>
-        <DataGrid x:Name="Products" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" SelectedCellsChanged="DataG_SelectedCellsChanged" Margin="59,264,550,57" />
+        <DataGrid x:Name="Products" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" SelectedCellsChanged="DataG_SelectedCellsChanged" Margin="59,264,377,57" />
     </Grid>
 </Window>

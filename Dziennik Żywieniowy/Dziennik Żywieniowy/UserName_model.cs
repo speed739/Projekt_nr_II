@@ -53,7 +53,6 @@ namespace Dziennik_Żywieniowy
                 user.ActivityLevel = reader.GetString(6);
                 user.BMI = reader.GetDecimal(7);
                 user.BMR = reader.GetDecimal(8);
-
             }
             return user;
         }
