@@ -188,7 +188,7 @@ namespace Dziennik_Żywieniowy
             DBconnection.Connection_Close(DBconnection.Connection());
             return id_diary;
         }
-        private void Button_ExitClick(object sender, RoutedEventArgs e)
+        private void Button_BackClick(object sender, RoutedEventArgs e)
         {
             int command_result;
             decimal kcal_value;

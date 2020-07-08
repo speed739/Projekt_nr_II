@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dziennik_Żywieniowy"
         mc:Ignorable="d"
-        Title="Registration" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="FoodDiary" ResizeMode="NoResize" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <ImageBrush ImageSource="Registration.jpg"/>
+        <ImageBrush ImageSource="Images/Registration.jpg"/>
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dziennik_Żywieniowy"
         mc:Ignorable="d"
-        Title="Login" Height="600" Width="800" WindowStartupLocation="CenterScreen" >
+        Title="FoodDiary" ResizeMode="NoResize" Height="600" Width="800" WindowStartupLocation="CenterScreen" >
     <Window.Background>
-        <ImageBrush ImageSource="logimage2.jpg"/>
+        <ImageBrush ImageSource="/Images/logimage2.jpg"/>
     </Window.Background>
     <Grid>
         <Border Background="#CFD4DA" CornerRadius="20" Margin="270,125,270,100" BorderBrush="#FF686868" BorderThickness="1">

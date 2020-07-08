@@ -78,7 +78,7 @@ namespace Dziennik_Żywieniowy
 
                 kcal_value = (decimal)command_kcal.ExecuteScalar();
                 half_dounat_chart.Value = (double)(kcal_value / user_model.BMR) * 100;
-                half_dounat_chart.Value = Convert.ToDouble(String.Format("{0:0.##}", half_dounat_chart.Value));
+                half_dounat_chart.Value = Convert.ToDouble(String.Format("{0:0.#}", half_dounat_chart.Value));
             }
             else
             {

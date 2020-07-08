@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dziennik_Żywieniowy"
         mc:Ignorable="d"
-        Title="FoodDiary" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+        Title="FoodDiary" ResizeMode="NoResize" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="backgroud.jpg"/>
+            <ImageBrush ImageSource="Images/backgroud.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "20" />
@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,0,0,3" FontSize="50" Text="Food Diary" FontWeight="UltraLight" FontFamily="Century Gothic" >
         </TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" FontSize="24" Text="With me u achieve your goals" FontWeight="Light"  FontFamily="Century Gothic" />
+        <TextBlock Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" FontSize="24"  FontWeight="Light"  FontFamily="Century Gothic" />
         <Separator Background="White"  />
         <Button x:Name="bnt_Sign_up" Grid.Column="1" Grid.Row="3" Margin="0,0,0,3" FontSize="35" Content="Log in Sign up" HorizontalAlignment="Left" FontWeight="Light" FontFamily="Century Gothic" Click="bnt_Signup" BorderBrush="{x:Null}" >
             <Button.Effect>

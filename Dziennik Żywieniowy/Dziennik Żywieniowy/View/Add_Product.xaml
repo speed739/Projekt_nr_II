@@ -5,50 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dziennik_Żywieniowy"
         mc:Ignorable="d"
-          Title="Add_Product" Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+          Title="FoodDiary"  Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/Addwindow.jpg"/>
+    </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Canvas Background="#FFB0AAAA" >
-            <Label Content="Add product to your FoodDiary" FontWeight="Bold" FontSize="20" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="90" Canvas.Top="19" RenderTransformOrigin="0.33,0.557"/>
-            <Label Content="Add new product to database" FontWeight="Bold" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="622" Canvas.Top="47"/>
-            <Label Content="Search :" FontSize="12" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Top="231" Canvas.Left="4"/>
-            <TextBox x:Name="txt_search"  Height="21" TextWrapping="Wrap" Width="170" Canvas.Left="58" Canvas.Top="234" TextChanged="TextBox_Search_TextChanged"/>
+        <Canvas>
+            <Label Content="Add product to your FoodDiary" FontWeight="Bold" FontSize="24" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="90" Canvas.Top="19" RenderTransformOrigin="0.33,0.557"/>
+            <Label Content="Add new product to database" FontWeight="Bold" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="609" Canvas.Top="47"/>
+            <Label Content="Search :" FontSize="14" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Top="230" Canvas.Left="2" FontWeight="Bold"/>
+            <TextBox x:Name="txt_search"  Height="21" TextWrapping="Wrap" Width="143" Canvas.Left="58" Canvas.Top="234" TextChanged="TextBox_Search_TextChanged"/>
             <TextBox x:Name="txt_productname"  Height="24" TextWrapping="Wrap" Width="276" Canvas.Left="604" Canvas.Top="109"/>
             <TextBox x:Name="txt_protein"       Text="0" Height="24" PreviewTextInput="OnlyNumbers" TextWrapping="Wrap"  Width="120" Canvas.Left="604" Canvas.Top="154"/>
             <TextBox x:Name="txt_fat"           Text="0" Height="23" PreviewTextInput="OnlyNumbers" TextWrapping="Wrap"  Width="120" Canvas.Left="604" Canvas.Top="199"/>
             <TextBox x:Name="txt_carbohydrates" Text="0"  PreviewTextInput="OnlyNumbers" Height="24" TextWrapping="Wrap"  Width="120" Canvas.Left="760" Canvas.Top="154"/>
             <TextBox x:Name="txt_kcal"          Text="0" PreviewTextInput="OnlyNumbers" Height="24" TextWrapping="Wrap"  Width="120" Canvas.Left="760" Canvas.Top="200"/>
-            <Label Content="Fat" Canvas.Left="601" Canvas.Top="177"/>
-            <Label Content="Product name" Canvas.Left="602" Canvas.Top="81"/>
-            <Label Content="Protein" Canvas.Left="602" Canvas.Top="131"/>
-            <Label Content="Carbohydrates" Canvas.Left="759" Canvas.Top="131"/>
-            <Label Content="Kcal" Canvas.Left="759" Canvas.Top="177"/>
-            <Button Content="Add" Click="Button_AddProductToDataBase_Click" Width="74" Canvas.Left="603" Canvas.Top="236"/>
-            <Button Content="Add to diary" Click="Button_Add_to_FoodDiary_Click" Width="74" Canvas.Left="368" Canvas.Top="233" Height="19"/>
-            <TextBox x:Name="txt_weight" PreviewTextInput="OnlyNumbers" Height="20" TextWrapping="Wrap"  Width="54" Canvas.Left="304" Canvas.Top="233"/>
-            <Label Content="1. Select product from list below" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="92"/>
-            <Label Content="Follow steps :" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="61"/>
-            <Label Content="2. Enter the value in grams into the [Weight] field" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="123"/>
-            <Label Content="Weight :" FontSize="12" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="250" Canvas.Top="230"/>
-            <Label Content="3. Click on [Add to diary] button" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="152"/>
-            <Label Content="4. If you can't find your product, please add him" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="180"/>
-            <Label Content="Update product in database" FontWeight="Bold" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="622" Canvas.Top="308"/>
+            <Label Content="Fat" Canvas.Left="598" Canvas.Top="175" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Product name" Canvas.Left="599" Canvas.Top="81" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Protein" Canvas.Left="599" Canvas.Top="129" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Carbohydrates" Canvas.Left="756" Canvas.Top="129" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Kcal" Canvas.Left="756" Canvas.Top="175" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Button Content="Add" Click="Button_AddProductToDataBase_Click" Width="75" Canvas.Left="603" Canvas.Top="236" FontSize="16" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
+            <Button Content="Add to diary" Click="Button_Add_to_FoodDiary_Click" Canvas.Left="338" Canvas.Top="230" FontSize="15" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Height="25"/>
+            <TextBox x:Name="txt_weight" PreviewTextInput="OnlyNumbers" Height="20" TextWrapping="Wrap"  Width="54" Canvas.Left="274" Canvas.Top="233"/>
+            <Label Content="1. Select product from list below" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="92"/>
+            <Label Content="Follow steps :" FontSize="20" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="61" FontWeight="Bold"/>
+            <Label Content="2. Enter the value in grams into the [Weight] field" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="123"/>
+            <Label Content="Weight :" FontSize="14" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="218" Canvas.Top="229" FontWeight="Bold"/>
+            <Label Content="3. Click on [Add to diary] button" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="152"/>
+            <Label Content="4. If you can't find your product, please add him" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="180"/>
+            <Label Content="Update product in database" FontWeight="Bold" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="609" Canvas.Top="308"/>
             <TextBox x:Name="txt_productname_update"  Height="24" TextWrapping="Wrap" Width="276" Canvas.Left="604" Canvas.Top="370"/>
             <TextBox x:Name="txt_protein_update"       Text="0" Height="24" PreviewTextInput="OnlyNumbers" TextWrapping="Wrap"  Width="120" Canvas.Left="604" Canvas.Top="415"/>
             <TextBox x:Name="txt_fat_update"           Text="0" Height="23" PreviewTextInput="OnlyNumbers" TextWrapping="Wrap"  Width="120" Canvas.Left="604" Canvas.Top="460"/>
             <TextBox x:Name="txt_carbohydrates_update" Text="0"  PreviewTextInput="OnlyNumbers" Height="24" TextWrapping="Wrap"  Width="120" Canvas.Left="760" Canvas.Top="415"/>
             <TextBox x:Name="txt_kcal_update"          Text="0" PreviewTextInput="OnlyNumbers" Height="24" TextWrapping="Wrap"  Width="120" Canvas.Left="760" Canvas.Top="461"/>
-            <Label Content="Fat" Canvas.Left="601" Canvas.Top="438"/>
-            <Label Content="Product name" Canvas.Left="602" Canvas.Top="342"/>
-            <Label Content="Protein" Canvas.Left="602" Canvas.Top="392"/>
-            <Label Content="Carbohydrates" Canvas.Left="759" Canvas.Top="392"/>
-            <Label Content="Kcal" Canvas.Left="759" Canvas.Top="438"/>
-            <Button Content="Exit" Click="Button_ExitClick" Width="74" Canvas.Left="910" Canvas.Top="10"/>
-            <Button Content="Update" Click="Button_UpdateClick" Width="74" Canvas.Left="604" Canvas.Top="497"/>
-            <Label Content="If you want to change existing product, please update him" FontSize="15" FontFamily="Century Gothic" Foreground="Black" BorderBrush="#FF9B9595" Canvas.Left="527" Canvas.Top="280"/>
+            <Label Content="Fat" Canvas.Left="598" Canvas.Top="436" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Product name" Canvas.Left="599" Canvas.Top="342" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Protein" Canvas.Left="599" Canvas.Top="390" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Carbohydrates" Canvas.Left="756" Canvas.Top="390" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Kcal" Canvas.Left="756" Canvas.Top="436" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <Button Content="Back" Click="Button_BackClick" Canvas.Left="898" Canvas.Top="11" Width="75" FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
+            <Button Content="Update" Click="Button_UpdateClick" Width="74" Canvas.Left="604" Canvas.Top="497" FontSize="16" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
+            <Label Content="If you want to change existing product" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="571" Canvas.Top="276"/>
         </Canvas>
         <DataGrid x:Name="Products" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" SelectedCellsChanged="DataG_SelectedCellsChanged" Margin="59,264,550,57" />
     </Grid>
