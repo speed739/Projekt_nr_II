@@ -161,9 +161,6 @@
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\UserWindow Them.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Userthem1.jpg" />
   </ItemGroup>
   <ItemGroup>

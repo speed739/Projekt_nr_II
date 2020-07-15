@@ -106,7 +106,6 @@ namespace Dziennik_Żywieniowy
                 }
             }
         }
-
         private bool CheckProduct(string productname)
         {
             int result;
@@ -266,7 +265,6 @@ namespace Dziennik_Żywieniowy
             MessageBox.Show("Updating product - " + product.ProductName + " is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
             Fill_data();
         }
-
     }
 }
 
