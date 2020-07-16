@@ -104,7 +104,6 @@ namespace Dziennik_Żywieniowy
             return result;
         }
         private void btn_exit_Click(object sender, RoutedEventArgs e) => Global_Methods.Exit_method();
-
         private void Button_Back_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -146,7 +145,7 @@ namespace Dziennik_Żywieniowy
             var command1 = new SqlCommand(sql1, DBconnection.Connection());
             command1.Parameters.AddWithValue("@id", Global_Methods.ReturnID_User(txt_user.Text));
             command1.ExecuteNonQuery();
-            
+
             DBconnection.Connection_Close(DBconnection.Connection());
         }
         private string Sex_Value()

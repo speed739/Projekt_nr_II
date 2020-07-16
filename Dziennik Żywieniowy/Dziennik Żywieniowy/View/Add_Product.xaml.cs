@@ -53,6 +53,7 @@ namespace Dziennik_Żywieniowy
             {
                 cell_infos.Add(Products.SelectedCells[i]);
             }
+
             if (cell_infos.Count > 0 && Products.SelectedIndex > -1)
             {
                 product.ProductName = (cell_infos[0].Column.GetCellContent(cell_infos[0].Item) as TextBlock).Text;
@@ -123,6 +124,7 @@ namespace Dziennik_Żywieniowy
         }
         private void TextBox_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
+            Products.UnselectAllCells();
             DataTable product_table = dt;
             DataView dv = product_table.DefaultView;
             dv.RowFilter = string.Format("ProductName like '%{0}%'", txt_search.Text);
