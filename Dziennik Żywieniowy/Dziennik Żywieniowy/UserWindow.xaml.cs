@@ -34,10 +34,14 @@ namespace Dziennik_Żywieniowy
             username.Content = Global_Methods.username;
             user_model = user_model.Return_info(Global_Methods.username);
         }
-        /*Wzory na skład ciała dla Mężczyzny*/
-        private void UpdatePie_ChartValues_Man()
+        private void UpdatePie_ChartValues(EnumSex sex)
         {
-            LBM = (user_model.Weight * 0.278) + (0.22 * user_model.Height);
+            double a, b;
+
+            a = (sex == EnumSex.Man) ? 0.278 : 0.384;
+            b = (sex == EnumSex.Man) ? 0.22 : 0.129;
+
+            LBM = (user_model.Weight * a) + (b * user_model.Height);
             Fat = user_model.Weight - LBM;
 
             List<double> list_LBM = new List<double>() { LBM };
@@ -45,17 +49,6 @@ namespace Dziennik_Żywieniowy
             part_green.Values = list_LBM.AsChartValues();
             part_yellow.Values = list_Fat.AsChartValues();
 
-        }
-        /*Wzory na skład ciała dla Kobiety*/
-        private void UpdatePie_ChartValues_Woman()
-        {
-            LBM = (user_model.Weight * 0.384) + (0.129 * user_model.Height);
-            Fat = user_model.Weight - LBM;
-
-            List<double> list_LBM = new List<double>() { LBM };
-            List<double> list_Fat = new List<double>() { Fat };
-            part_green.Values = list_LBM.AsChartValues();
-            part_yellow.Values = list_Fat.AsChartValues();
         }
         private void UpdateHalfdounat_ChartValues()
         {
@@ -89,14 +82,7 @@ namespace Dziennik_Żywieniowy
         }
         private void Charts_Loaded(object sender, RoutedEventArgs e)
         {
-            if (user_model.Sex == "Man")
-            {
-                UpdatePie_ChartValues_Man();
-            }
-            else
-            {
-                UpdatePie_ChartValues_Woman();
-            }
+            UpdatePie_ChartValues(user_model.Sex);
             UpdateHalfdounat_ChartValues();
         }
         private void Exit_Click(object sender, RoutedEventArgs e) => Global_Methods.Exit_method();
@@ -118,6 +104,13 @@ namespace Dziennik_Żywieniowy
             half_dounat_chart.Value = (double)Global_Methods.chartvalue * 100;
             half_dounat_chart.Value = Convert.ToDouble(String.Format("{0:0.#}", half_dounat_chart.Value));
             CompleatDaily();
+        }
+
+        private void diary_Click(object sender, RoutedEventArgs e)
+        {
+            Diary diary = new Diary();
+            diary.ShowDialog();
+
         }
         private void CompleatDaily()
         {

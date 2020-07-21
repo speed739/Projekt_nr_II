@@ -32,6 +32,8 @@ namespace Dziennik_Żywieniowy
         public Registration()
         {
             InitializeComponent();
+            chbox_L.IsChecked = true;
+            chbox_Man.IsChecked = true;
             activity_chbox_list = new List<CheckBox>() { chbox_L, chbox_M, chbox_H };
             textBoxes_list = new List<TextBox>() { txt_age, txt_height, txt_weight, txt_BMI, txt_BMR };
         }
@@ -120,7 +122,6 @@ namespace Dziennik_Żywieniowy
             {
                 Create();
                 MessageBox.Show("Account has been created", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
-                Close();
             }
             else
             {

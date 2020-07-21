@@ -27,8 +27,6 @@ namespace Dziennik_Żywieniowy
         private void btn_Registration_Click_1(object sender, RoutedEventArgs e)
         {
             Registration reg = new Registration();
-            reg.chbox_L.IsChecked = true;
-            reg.chbox_Man.IsChecked = true;
             reg.ShowDialog();
         }
         private void btn_Submit_Click_1(object sender, RoutedEventArgs e)

@@ -74,6 +74,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Diary.xaml.cs">
+      <DependentUpon>Diary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EnumSex.cs" />
     <Compile Include="SqlQueries.cs" />
     <Compile Include="View\Add_Product.xaml.cs">
       <DependentUpon>Add_Product.xaml</DependentUpon>
@@ -92,6 +96,10 @@
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Diary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Add_Product.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

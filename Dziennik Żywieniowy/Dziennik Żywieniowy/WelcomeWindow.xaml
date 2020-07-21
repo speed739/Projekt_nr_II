@@ -27,7 +27,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,0,0,3" FontSize="50" Text="Food Diary" FontWeight="UltraLight" FontFamily="Century Gothic" ></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,0,0,3" FontSize="50" Text="Food Diary" FontWeight="UltraLight" FontFamily="Century Gothic" />
         <TextBlock Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" FontSize="24"  FontWeight="Light"  FontFamily="Century Gothic" />
         <Button x:Name="bnt_Sign_up" Grid.Column="1" Grid.Row="4" Margin="0,0,0,3" FontSize="35" Content="Log in " HorizontalAlignment="Left" FontWeight="Light" FontFamily="Century Gothic" Click="bnt_Signup" BorderBrush="{x:Null}" >
             <Button.Effect>
@@ -95,5 +95,19 @@
                 </Style>
             </Button.Style>
         </Button>
+        <Canvas RenderTransformOrigin="1.917,4.381" Margin="14,4,449,15" Grid.Row="2" Grid.ColumnSpan="4">
+            <Line
+            X1="0" X2="350"
+            StrokeThickness="3" >
+                <Line.Stroke>
+                    <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                        <RadialGradientBrush.GradientStops>
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="White" Offset="0.25" />
+                        </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </Line.Stroke>
+            </Line>
+        </Canvas>
     </Grid>
 </Window>

@@ -164,7 +164,7 @@ namespace Dziennik_Żywieniowy
             {
                 if (string.IsNullOrWhiteSpace(txt_productname_update.Text))
                 {
-                    MessageBox.Show("Product name field can't be empty", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Field:[Product name] can't be empty", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {

@@ -14,7 +14,9 @@ namespace Dziennik_Żywieniowy
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public int ID_User, Age;
-        public string Username, Sex, ActivityLevel;
+        public string Username, ActivityLevel;
+        private string _sex;
+        public EnumSex Sex;
         public double Weight, Height;
         public decimal BMI, BMR;
 
@@ -48,12 +50,14 @@ namespace Dziennik_Żywieniowy
                 user.Username = reader.GetString(1);
                 user.Weight = reader.GetDouble(2);
                 user.Height = reader.GetDouble(3);
-                user.Sex = reader.GetString(4);
+                user._sex = reader.GetString(4);
                 user.Age = reader.GetByte(5);
                 user.ActivityLevel = reader.GetString(6);
                 user.BMI = reader.GetDecimal(7);
                 user.BMR = reader.GetDecimal(8);
             }
+            Sex = (user._sex == "Man") ? EnumSex.Man : EnumSex.Woman;
+
             return user;
         }
     }

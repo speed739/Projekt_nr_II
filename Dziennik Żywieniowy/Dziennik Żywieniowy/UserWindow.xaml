@@ -10,7 +10,6 @@
     <Window.Background>
         <ImageBrush ImageSource="/Images/Userthem1.jpg"/>
     </Window.Background>
-
     <Grid RenderTransformOrigin="0.574,0.517">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "150"/>
@@ -29,7 +28,7 @@
         </Grid.RowDefinitions>
         <Label  x:Name="username" HorizontalAlignment="Center"  Content="TEST" Grid.Column="0" Grid.Row="1"  FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" BorderBrush="#FF9B9595" Foreground="White"/>
         <Button x:Name="add_Product" Content="Add Product" Grid.Column="0" Grid.Row="2"  FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="add_Product_Click"/>
-        <Button x:Name="diary"       Content="Diary"    Grid.Column="0" Grid.Row="3"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" />
+        <Button x:Name="diary"       Content="Diary"    Grid.Column="0" Grid.Row="3"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="diary_Click" />
         <Button x:Name="settings"    Content="Settings" Grid.Column="0" Grid.Row="4"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="settings_Click"/>
         <Button x:Name="log_out"     Content="Log out"  Grid.Column="0" Grid.Row="5"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="log_out_Click" />
         <Button x:Name="exit"        Content="Exit"     Grid.Column="0" Grid.Row="6"     FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Click="Exit_Click"/>
@@ -41,7 +40,7 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Canvas.RenderTransform>
-            <lvc:PieChart x:Name="Pie_chart" LegendLocation="Bottom"  Hoverable="False" DataTooltip="{x:Null}" Canvas.Left="189" Height="205" Width="313" Loaded="Charts_Loaded" AutomationProperties.IsRequiredForForm="True" Foreground="White" ScrollBarFill="#1E443131" Canvas.Top="-3">
+            <lvc:PieChart x:Name="Pie_chart" LegendLocation="Bottom"  Hoverable="False" DataTooltip="{x:Null}" Canvas.Left="195" Height="175" Width="276" Loaded="Charts_Loaded" AutomationProperties.IsRequiredForForm="True" Foreground="White" ScrollBarFill="#1E443131" Canvas.Top="9">
                 <lvc:PieChart.Series>
                     <lvc:PieSeries x:Name="part_green"    Title="Lean body mass"  Values="0"  DataLabels="True" Foreground="#FFFFFEFC">
                         <lvc:PieSeries.Fill>
@@ -76,7 +75,35 @@
             </lvc:Gauge>
             <Label Content="Daily calories in %" Height="34" FontSize="22" FontFamily="Century Gothic" Canvas.Left="-55" Canvas.Top="11" Width="200" Foreground="White"/>
         </Canvas>
+        <Canvas RenderTransformOrigin="1.917,4.381" Margin="14,4,449,15" Grid.Row="2" Grid.ColumnSpan="4">
+            <Line
+            X1="0" X2="900"
+            StrokeThickness="3" Canvas.Top="-38" Canvas.Left="-17" >
+                <Line.Stroke>
+                    <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                        <RadialGradientBrush.GradientStops>
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="White" Offset="0.25" />
+                        </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </Line.Stroke>
+            </Line>
+        </Canvas>
+        <Canvas RenderTransformOrigin="1.917,4.381" Margin="14,4,449,15" Grid.Row="2" Grid.ColumnSpan="4">
+            <Line
+            Y1="0" Y2="470"
+            StrokeThickness="3" Canvas.Top="-38" Canvas.Left="137" >
+                <Line.Stroke>
+                    <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                        <RadialGradientBrush.GradientStops>
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="White" Offset="0.25" />
+                        </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </Line.Stroke>
+            </Line>
+        </Canvas>
         <Label Content="Food Diary" HorizontalAlignment="Left" VerticalAlignment="Top" Height="81" Grid.Column="2"  FontSize="55" FontFamily="Century Gothic"  Foreground="White"  Margin="147,10,0,0" Width="311"/>
-        <Label Content="Body composition in Kg" FontSize="22" FontFamily="Century Gothic" RenderTransformOrigin="1.093,-0.182" Margin="341,51,-125,-66" Grid.Row="6" Grid.Column="2" Foreground="White"/>
+        <Label Content="Body composition in Kg" FontSize="22" FontFamily="Century Gothic" RenderTransformOrigin="1.093,-0.182" Margin="333,7,-117,-31" Grid.Row="7" Grid.Column="2" Foreground="White"/>
     </Grid>
 </Window>
