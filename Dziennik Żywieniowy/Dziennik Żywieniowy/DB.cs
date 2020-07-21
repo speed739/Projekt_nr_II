@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dziennik_Żywieniowy
 {
-    static class DBconnection
+    static class DB
     {
         static readonly string connectionString =
                        @"Data Source=DESKTOP-MA3N1EE\SQLEXPRESS;Initial Catalog=FoodDiary;Integrated Security=True;

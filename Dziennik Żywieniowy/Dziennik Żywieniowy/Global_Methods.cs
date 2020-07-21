@@ -25,16 +25,5 @@ namespace Dziennik_Żywieniowy
             windows = Application.Current.Windows.OfType<Window>().ToList();
             windows.ForEach(x => x.Close());
         }
-        public static int ReturnID_User(string user)
-        {
-            int id;
-            string sql = "SELECT ID_User FROM Users WHERE Username = @user";
-            var command = new SqlCommand(sql, DBconnection.Connection());
-            command.Parameters.AddWithValue("@user", user);
-            id = (int)command.ExecuteScalar();
-
-            DBconnection.Connection_Close(DBconnection.Connection());
-            return id;
-        }
     }
 }

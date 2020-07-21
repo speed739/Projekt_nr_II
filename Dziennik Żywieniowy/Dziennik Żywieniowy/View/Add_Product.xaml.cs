@@ -25,6 +25,7 @@ namespace Dziennik_Żywieniowy
     {
         ProductModel product = new ProductModel();
         UserName_model user_model = new UserName_model();
+        SqlQueries sql_query = new SqlQueries();
         DataTable dt = new DataTable("Products");
         List<TextBox> textBoxes;
         public Add_Product()
@@ -32,19 +33,19 @@ namespace Dziennik_Żywieniowy
             InitializeComponent();
             user_model = user_model.Return_info(Global_Methods.username);
             Fill_data();
-            textBoxes = new List<TextBox>() { txt_carbohydrates, txt_fat, txt_kcal, txt_productname, txt_protein };
+            textBoxes = new List<TextBox>() { txt_carbohydrates, txt_fat, txt_kcal, txt_protein };
         }
         private void Fill_data()
         {
             DataTable products_datatable = new DataTable();
             string sql_comm = "SELECT ProductName,Protein,Carbohydrates,Fat,Kcal,Weight FROM Products";
-            SqlCommand command = new SqlCommand(sql_comm, DBconnection.Connection());
+            SqlCommand command = new SqlCommand(sql_comm, DB.Connection());
             SqlDataAdapter sda = new SqlDataAdapter(command);
 
             sda.Fill(products_datatable);
             dt = products_datatable;
             Products.ItemsSource = dt.DefaultView;
-            DBconnection.Connection_Close(DBconnection.Connection());
+            DB.Connection_Close(DB.Connection());
         }
         private void DataG_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
@@ -73,34 +74,24 @@ namespace Dziennik_Żywieniowy
         }
         private void Button_AddProductToDataBase_Click(object sender, RoutedEventArgs e)
         {
-            if (txt_productname.Text.Length == 0)
+            if (string.IsNullOrWhiteSpace(txt_productname.Text))
             {
-                MessageBox.Show("Product name field can't be empty", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Field:[Product name] can't be empty", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                if (CheckProduct(txt_productname.Text) == true)
+                if (CheckProduct(txt_productname.Text))
                 {
                     MessageBox.Show("Product with the given name already exists, change the name or update the existing product", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    string sql_comm = "INSERT INTO Products(ProductName,Protein,Carbohydrates,Fat,Kcal) VALUES(@p_name,@protein,@carbs,@fat,@kcal)";
-                    SqlCommand command = new SqlCommand(sql_comm, DBconnection.Connection());
-                    command.Parameters.AddWithValue("@p_name", txt_productname.Text);
-                    command.Parameters.AddWithValue("@protein", float.Parse(txt_protein.Text));
-                    command.Parameters.AddWithValue("@carbs ", float.Parse(txt_carbohydrates.Text));
-                    command.Parameters.AddWithValue("@fat", float.Parse(txt_fat.Text));
-                    command.Parameters.AddWithValue("@kcal", float.Parse(txt_kcal.Text));
-                    command.ExecuteNonQuery();
-
-                    DBconnection.Connection_Close(DBconnection.Connection());
-                    MessageBoxResult result = MessageBox.Show("Adding your product is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+                    sql_query.CreateProduct(txt_productname.Text, txt_protein.Text, txt_carbohydrates.Text, txt_fat.Text, txt_kcal.Text);
                     textBoxes.ForEach(x =>
                     {
-                        if (x.Text.Length > 0)
+                        if (!string.IsNullOrWhiteSpace(x.Text))
                         {
-                            x.Clear();
+                            x.Text = "0";
                         }
                     });
                     Fill_data();
@@ -109,18 +100,7 @@ namespace Dziennik_Żywieniowy
         }
         private bool CheckProduct(string productname)
         {
-            int result;
-            string sql = "SELECT COUNT(*) FROM Products WHERE ProductName = @p_name";
-            SqlCommand command = new SqlCommand(sql, DBconnection.Connection());
-            command.Parameters.AddWithValue("@p_name", productname);
-            result = (int)command.ExecuteScalar();
-            DBconnection.Connection_Close(DBconnection.Connection());
-
-            if (result > 0)
-            {
-                return true;
-            }
-            return false;
+            return sql_query.ProductExist(productname);
         }
         private void TextBox_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -141,22 +121,14 @@ namespace Dziennik_Żywieniowy
                 MessageBoxResult result = MessageBox.Show("Are you sure you want add this product: " + product.ProductName + " ?", "FoodDiary", MessageBoxButton.YesNo, MessageBoxImage.Information);
                 if (result == MessageBoxResult.Yes)
                 {
-                    string sql = "INSERT INTO DiaryDetails(ID_Diary,ID_Product,Kcal)" +
-                                          "VALUES (@id_diary,@id_product,@kcal)";
-                    var command = new SqlCommand(sql, DBconnection.Connection());
-                    command.Parameters.AddWithValue("@id_diary", ReturnUserID_Diary());
-                    command.Parameters.AddWithValue("@id_product", ReturnProductID());
-                    command.Parameters.AddWithValue("@kcal", CalculateKcalValue());
-                    command.ExecuteNonQuery();
-
-                    DBconnection.Connection_Close(DBconnection.Connection());
+                    sql_query.AddProductToDiary(user_model.ID_User, product.ProductName, CalculateKcalValue());
                 }
             }
         }
         private float CalculateKcalValue()
         {
             float result, weight;
-            if (txt_weight.Text.Length == 0)
+            if (string.IsNullOrWhiteSpace(txt_weight.Text))
             {
                 return 0;
             }
@@ -167,28 +139,6 @@ namespace Dziennik_Żywieniowy
             }
             return result;
         }
-        private int ReturnProductID()
-        {
-            int id_product;
-            string sql = "Select ID_Product From Products Where ProductName = @p_name";
-            var command = new SqlCommand(sql, DBconnection.Connection());
-            command.Parameters.AddWithValue("@p_name", product.ProductName);
-            id_product = (int)command.ExecuteScalar();
-
-            DBconnection.Connection_Close(DBconnection.Connection());
-            return id_product;
-        }
-        private int ReturnUserID_Diary()
-        {
-            int id_diary;
-            string sql = "Select ID_Diary From Diary Where ID_User = @user";
-            var command = new SqlCommand(sql, DBconnection.Connection());
-            command.Parameters.AddWithValue("@user", user_model.ID_User);
-            id_diary = (int)command.ExecuteScalar();
-
-            DBconnection.Connection_Close(DBconnection.Connection());
-            return id_diary;
-        }
         private void Button_BackClick(object sender, RoutedEventArgs e)
         {
             UpdateChartValues();
@@ -197,25 +147,10 @@ namespace Dziennik_Żywieniowy
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => UpdateChartValues();
         private void UpdateChartValues()
         {
-            int command_result;
-            decimal kcal_value;
-            int id_diary = ReturnUserID_Diary();
-
-            string sql1 = "SELECT COUNT(*) From DiaryDetails Where ID_Diary = @diary AND AddData = CONVERT(varchar, getdate(), 23)";
-            var command_count = new SqlCommand(sql1, DBconnection.Connection());
-            command_count.Parameters.AddWithValue("@diary", id_diary);
-            command_result = (int)command_count.ExecuteScalar();
-            DBconnection.Connection_Close(DBconnection.Connection());
-
-            if (command_result > 0)
+            int id_diary = sql_query.ReturnUserIDdiary(user_model.ID_User);
+            if (sql_query.CheckDiaryDetails(id_diary) > 0)
             {
-                string sql = "SELECT SUM(Kcal) From DiaryDetails Where ID_Diary = @diary AND AddData = CONVERT(varchar, getdate(), 23)";
-                var command = new SqlCommand(sql, DBconnection.Connection());
-                command.Parameters.AddWithValue("@diary", id_diary);
-                kcal_value = (decimal)command.ExecuteScalar();
-
-                DBconnection.Connection_Close(DBconnection.Connection());
-                Global_Methods.chartvalue = kcal_value / user_model.BMR;
+                Global_Methods.chartvalue = sql_query.CalculateKcal(id_diary) / user_model.BMR;
             }
         }
         private void OnlyNumbers(object sender, TextCompositionEventArgs e) => e.Handled = Global_Methods.IsTextAllowed(e.Text);
@@ -227,7 +162,7 @@ namespace Dziennik_Żywieniowy
             }
             else
             {
-                if (txt_productname_update.Text.Length == 0)
+                if (string.IsNullOrWhiteSpace(txt_productname_update.Text))
                 {
                     MessageBox.Show("Product name field can't be empty", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
@@ -235,36 +170,25 @@ namespace Dziennik_Żywieniowy
                 {
                     if (txt_productname_update.Text == product.ProductName) //czy nazwa produktu pozostała bez zmian
                     {
-                        Products_Update();
+                        UpdateProducts();
                     }
                     else
                     {
-                        if (CheckProduct(txt_productname_update.Text) == true)
+                        if (CheckProduct(txt_productname_update.Text))
                         {
                             MessageBox.Show("Product with the given name already exists ", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            Products_Update();
+                            UpdateProducts();
                         }
                     }
                 }
             }
         }
-        private void Products_Update()
+        private void UpdateProducts()
         {
-            string sql_comm = " UPDATE Products SET ProductName = @p_name,Protein = @protein,Carbohydrates = @carbs,Fat = @fat,Kcal = @kcal WHERE ProductName = @old_p_name";
-            SqlCommand command_update = new SqlCommand(sql_comm, DBconnection.Connection());
-            command_update.Parameters.AddWithValue("@p_name", txt_productname_update.Text);
-            command_update.Parameters.AddWithValue("@protein", float.Parse(txt_protein_update.Text));
-            command_update.Parameters.AddWithValue("@carbs", float.Parse(txt_carbohydrates_update.Text));
-            command_update.Parameters.AddWithValue("@fat", float.Parse(txt_fat_update.Text));
-            command_update.Parameters.AddWithValue("@kcal", float.Parse(txt_kcal_update.Text));
-            command_update.Parameters.AddWithValue("@old_p_name", product.ProductName);
-            command_update.ExecuteNonQuery();
-
-            DBconnection.Connection_Close(DBconnection.Connection());
-            MessageBox.Show("Updating product - " + product.ProductName + " is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
+            sql_query.UpdateProduct(txt_productname_update.Text, txt_protein_update.Text, txt_carbohydrates_update.Text, txt_fat_update.Text, txt_kcal_update.Text, product.ProductName);
             Fill_data();
         }
     }

@@ -20,12 +20,12 @@ namespace Dziennik_Żywieniowy
         {
             int id;
             string sql = "SELECT MAX(ID_Product) FROM Products";
-            var command = new SqlCommand(sql, DBconnection.Connection());
+            var command = new SqlCommand(sql, DB.Connection());
             using (var reader = command.ExecuteReader())
             {
                 reader.Read();
                 id = Convert.ToInt32(reader[0]);
-                DBconnection.Connection_Close(DBconnection.Connection());
+                DB.Connection_Close(DB.Connection());
                 return id;
             }
         }
@@ -44,7 +44,7 @@ namespace Dziennik_Żywieniowy
         {
             ProductModel output = new ProductModel();
             string sql = "SELECT ProductName,Weight,Kcal,Protein,Carbohydrates,Fat FROM Products WHERE ID_Product = @id";
-            var command = new SqlCommand(sql, DBconnection.Connection());
+            var command = new SqlCommand(sql, DB.Connection());
             command.Parameters.AddWithValue("@id", i);
             using (var reader = command.ExecuteReader())
             {
@@ -56,7 +56,7 @@ namespace Dziennik_Żywieniowy
                 output.Carbohydrates = float.Parse((reader["Carbohydrates"]).ToString());
                 output.Fat = float.Parse((reader["Fat"]).ToString());
 
-                DBconnection.Connection_Close(DBconnection.Connection());
+                DB.Connection_Close(DB.Connection());
             }
             return output;
         }

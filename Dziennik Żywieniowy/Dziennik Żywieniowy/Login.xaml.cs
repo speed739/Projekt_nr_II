@@ -33,8 +33,8 @@ namespace Dziennik_Żywieniowy
         }
         private void btn_Submit_Click_1(object sender, RoutedEventArgs e)
         {
-           
-            if (txt_Username.Text.Length < 1  || txt_Password.Password.Length < 1)
+
+            if (string.IsNullOrWhiteSpace(txt_Username.Text) || string.IsNullOrWhiteSpace(txt_Password.Password))
             {
                 MessageBoxResult msg = MessageBox.Show("Please insert login and password", "FoodDiary", MessageBoxButton.OKCancel, MessageBoxImage.Information);
                 if (msg != MessageBoxResult.OK)
@@ -46,17 +46,11 @@ namespace Dziennik_Żywieniowy
             }
             else
             {
-                string sql = "SELECT COUNT(*) FROM Users WHERE Username = @user AND Password = HASHBYTES('SHA1','@password')";
-                var command = new SqlCommand(sql, DBconnection.Connection());
-                command.Parameters.AddWithValue("@user", txt_Username.Text);
-                command.Parameters.AddWithValue("@password", txt_Password.Password);
-
-                int results = (int)command.ExecuteScalar();
-                if (results > 0)
+                SqlQueries query = new SqlQueries();
+                if (query.Login(txt_Username.Text, txt_Password.Password) > 0)
                 {
                     Global_Methods.username = txt_Username.Text;
                     UserWindow userwindow = new UserWindow();
-                    DBconnection.Connection_Close(DBconnection.Connection());
                     Close();
                     userwindow.ShowDialog();
                 }
@@ -65,7 +59,6 @@ namespace Dziennik_Żywieniowy
                     MessageBoxResult result = MessageBox.Show("Wrong login or password", "FoodDiary", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                     if (result != MessageBoxResult.OK)
                     {
-                        DBconnection.Connection_Close(DBconnection.Connection());
                         WelcomeWindow main = new WelcomeWindow();
                         Close();
                         main.ShowDialog();

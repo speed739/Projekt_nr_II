@@ -25,6 +25,7 @@ namespace Dziennik_Żywieniowy
     public partial class Registration : Window
     {
 
+        SqlQueries query = new SqlQueries();
         List<CheckBox> activity_chbox_list;
         List<TextBox> textBoxes_list;
         private double height, weight, bmi, bmr, age, actv_l = 1.2;
@@ -68,15 +69,9 @@ namespace Dziennik_Żywieniowy
         private void Only_numbers(object sender, TextCompositionEventArgs e) => e.Handled = Global_Methods.IsTextAllowed(e.Text);
         private bool Check_login()
         {
-            if (txt_user.Text.Length > 0)
+            if (!string.IsNullOrWhiteSpace(txt_user.Text))
             {
-                string sql;
-                sql = "SELECT COUNT(*) FROM Users WHERE Username = @user";
-                var command = new SqlCommand(sql, DBconnection.Connection());
-                command.Parameters.AddWithValue("@user", txt_user.Text);
-
-                int results = (int)command.ExecuteScalar();
-                if (results > 0)
+                if (query.CheckUser(txt_user.Text) > 0)
                 {
                     MessageBox.Show("Username is taken, please change it ", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
                     return false;
@@ -87,7 +82,7 @@ namespace Dziennik_Żywieniowy
         }
         private bool Check_password()
         {
-            if (txt_pass.Password.Length == 0)
+            if (string.IsNullOrWhiteSpace(txt_pass.Password))
             {
                 return false;
             }
@@ -98,7 +93,7 @@ namespace Dziennik_Żywieniowy
             bool result = true;
             textBoxes_list.ForEach(x =>
             {
-                if (x.Text.Length < 1)
+                if (string.IsNullOrWhiteSpace(x.Text))
                     result = false;
             });
             return result;
@@ -106,11 +101,22 @@ namespace Dziennik_Żywieniowy
         private void btn_exit_Click(object sender, RoutedEventArgs e) => Global_Methods.Exit_method();
         private void Button_Back_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            List<Window> windows = new List<Window>();
+            windows = Application.Current.Windows.OfType<Window>().ToList();
+            if (windows.Count == 2)
+            {
+                Login log = new Login();
+                Close();
+                log.ShowDialog();
+            }
+            else
+            {
+                Close();
+            }
         }
         private void btn_registration_Click(object sender, RoutedEventArgs e)
         {
-            if (Check_login() == true && Check_password() == true && Check_required_fields() == true)
+            if (Check_login() && Check_password() && Check_required_fields())
             {
                 Create();
                 MessageBox.Show("Account has been created", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -127,26 +133,7 @@ namespace Dziennik_Żywieniowy
         }
         private void Create()
         {
-            string sql = "INSERT INTO Users(Username,Password,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR)" +
-                "VALUES (@user,HASHBYTES('SHA1','@password'),@weight,@height,@sex,@age,@active,@bmi,@bmr)";
-            var command = new SqlCommand(sql, DBconnection.Connection());
-            command.Parameters.AddWithValue("@user", txt_user.Text);
-            command.Parameters.AddWithValue("@password", txt_pass.Password);
-            command.Parameters.AddWithValue("@weight", weight);
-            command.Parameters.AddWithValue("@height", height);
-            command.Parameters.AddWithValue("@sex", Sex_Value());
-            command.Parameters.AddWithValue("@active", Activity_Value());
-            command.Parameters.AddWithValue("@age", (int)age);
-            command.Parameters.AddWithValue("@bmi", bmi);
-            command.Parameters.AddWithValue("@bmr", bmr);
-            command.ExecuteNonQuery();
-
-            string sql1 = "INSERT INTO Diary(ID_User) VALUES (@id)";
-            var command1 = new SqlCommand(sql1, DBconnection.Connection());
-            command1.Parameters.AddWithValue("@id", Global_Methods.ReturnID_User(txt_user.Text));
-            command1.ExecuteNonQuery();
-
-            DBconnection.Connection_Close(DBconnection.Connection());
+            query.CreateUser(txt_user.Text, txt_pass.Password, weight, height, Sex_Value(), Activity_Value(), age, bmi, bmr);
         }
         private string Sex_Value()
         {
@@ -158,7 +145,7 @@ namespace Dziennik_Żywieniowy
         }
         private string Activity_Value()
         {
-            string result = "";
+            string result = string.Empty;
             activity_chbox_list.ForEach(x =>
             {
                 if (x.IsChecked == true)
@@ -168,7 +155,7 @@ namespace Dziennik_Żywieniowy
         }
         private void btn_count_Click(object sender, RoutedEventArgs e)
         {
-            if (txt_height.Text.Length > 0 && txt_weight.Text.Length > 0 && txt_age.Text.Length > 0)
+            if (!string.IsNullOrWhiteSpace(txt_height.Text) && !string.IsNullOrWhiteSpace(txt_weight.Text) && !string.IsNullOrWhiteSpace(txt_age.Text))
             {
                 height = Convert.ToDouble(txt_height.Text) / 100;
                 weight = Convert.ToDouble(txt_weight.Text);

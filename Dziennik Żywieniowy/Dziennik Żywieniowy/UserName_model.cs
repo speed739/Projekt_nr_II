@@ -37,10 +37,10 @@ namespace Dziennik_Żywieniowy
         {
             UserName_model user = new UserName_model();
             string sql = "SELECT ID_User,Username,Weight,Height,Sex,Age,ActivityLevel,BMI,BMR FROM Users WHERE Username = @user";
-            var command = new SqlCommand(sql, DBconnection.Connection());
+            var command = new SqlCommand(sql, DB.Connection());
             command.Parameters.AddWithValue("@user", username);
             SqlDataReader reader = command.ExecuteReader();
-            DBconnection.Connection_Close(DBconnection.Connection());
+            DB.Connection_Close(DB.Connection());
 
             while (reader.Read())
             {

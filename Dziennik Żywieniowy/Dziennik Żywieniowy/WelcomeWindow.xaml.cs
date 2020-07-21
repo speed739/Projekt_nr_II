@@ -31,5 +31,11 @@ namespace Dziennik_Żywieniowy
             log_In.ShowDialog();
         }
         private void Button_Click(object sender, RoutedEventArgs e) => Global_Methods.Exit_method();
+        private void bnt_registration_Click(object sender, RoutedEventArgs e)
+        {
+            Registration reg = new Registration();
+            Close();
+            reg.ShowDialog();
+        }
     }
 }

@@ -74,11 +74,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SqlQueries.cs" />
     <Compile Include="View\Add_Product.xaml.cs">
       <DependentUpon>Add_Product.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Add_Product_Model.cs" />
-    <Compile Include="DBconnection.cs" />
+    <Compile Include="DB.cs" />
     <Compile Include="Global_Methods.cs" />
     <Compile Include="ProductModel.cs" />
     <Compile Include="Registration.xaml.cs">

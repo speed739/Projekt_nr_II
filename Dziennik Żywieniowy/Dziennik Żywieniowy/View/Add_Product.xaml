@@ -30,8 +30,8 @@
             <Label Content="Protein" Canvas.Left="599" Canvas.Top="129" Foreground="White" FontWeight="Bold" FontSize="14"/>
             <Label Content="Carbohydrates" Canvas.Left="756" Canvas.Top="129" Foreground="White" FontWeight="Bold" FontSize="14"/>
             <Label Content="Kcal" Canvas.Left="756" Canvas.Top="175" Foreground="White" FontWeight="Bold" FontSize="14"/>
-            <Button Content="Add" Click="Button_AddProductToDataBase_Click" Width="75" Canvas.Left="603" Canvas.Top="236" FontSize="16" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
-            <Button Content="Add to diary" Click="Button_Add_to_FoodDiary_Click" Canvas.Left="338" Canvas.Top="230" FontSize="15" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Height="25"/>
+            <Button Content="Add" Click="Button_AddProductToDataBase_Click" Width="75" Canvas.Left="603" Canvas.Top="236" FontSize="16" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Height="27"/>
+            <Button Content="Add to diary" Click="Button_Add_to_FoodDiary_Click" Canvas.Left="338" Canvas.Top="230" FontSize="15" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Height="27"/>
             <TextBox x:Name="txt_weight" PreviewTextInput="OnlyNumbers" Height="20" TextWrapping="Wrap"  Width="54" Canvas.Left="274" Canvas.Top="233"/>
             <Label Content="1. Select product from list below" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="92"/>
             <Label Content="Follow steps :" FontSize="20" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="64" Canvas.Top="61" FontWeight="Bold"/>
@@ -51,7 +51,7 @@
             <Label Content="Carbohydrates" Canvas.Left="756" Canvas.Top="390" Foreground="White" FontWeight="Bold" FontSize="14"/>
             <Label Content="Kcal" Canvas.Left="756" Canvas.Top="436" Foreground="White" FontWeight="Bold" FontSize="14"/>
             <Button Content="Back" Click="Button_BackClick" Canvas.Left="898" Canvas.Top="11" Width="75" FontSize="20" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
-            <Button Content="Update" Click="Button_UpdateClick" Width="74" Canvas.Left="604" Canvas.Top="497" FontSize="16" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595"/>
+            <Button Content="Update" Click="Button_UpdateClick" Width="74" Canvas.Left="604" Canvas.Top="497" FontSize="16" FontFamily="Century Gothic" Background="#FF5B5B5B" Foreground="#FFFDFFFD" BorderBrush="#FF9B9595" Height="27"/>
             <Label Content="If you want to change existing product" FontSize="18" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF9B9595" Canvas.Left="571" Canvas.Top="276"/>
         </Canvas>
         <DataGrid x:Name="Products" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" SelectedCellsChanged="DataG_SelectedCellsChanged" Margin="59,264,377,57" />

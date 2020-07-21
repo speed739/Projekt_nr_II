@@ -63,18 +63,18 @@ namespace Dziennik_Żywieniowy
             decimal kcal_value;
 
             string sql = "Select ID_Diary From Diary Where ID_User = @user";
-            var command_diary = new SqlCommand(sql, DBconnection.Connection());
+            var command_diary = new SqlCommand(sql, DB.Connection());
             command_diary.Parameters.AddWithValue("@user", user_model.ID_User);
             id_diary = (int)command_diary.ExecuteScalar();
 
             string sql1 = "SELECT COUNT(*) From DiaryDetails Where ID_Diary = @diary AND AddData = CONVERT(varchar, getdate(), 23)";
-            var command_count = new SqlCommand(sql1, DBconnection.Connection());
+            var command_count = new SqlCommand(sql1, DB.Connection());
             command_count.Parameters.AddWithValue("@diary", id_diary);
 
             if ((int)command_count.ExecuteScalar() > 0)
             {
                 string sql2 = "SELECT SUM(Kcal) From DiaryDetails Where ID_Diary = @diary AND AddData = CONVERT(varchar, getdate(), 23)";
-                var command_kcal = new SqlCommand(sql2, DBconnection.Connection());
+                var command_kcal = new SqlCommand(sql2, DB.Connection());
                 command_kcal.Parameters.AddWithValue("@diary", id_diary);
 
                 kcal_value = (decimal)command_kcal.ExecuteScalar();
