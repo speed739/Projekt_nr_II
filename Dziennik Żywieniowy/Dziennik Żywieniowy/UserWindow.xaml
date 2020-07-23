@@ -6,7 +6,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:Dziennik_Żywieniowy"
         mc:Ignorable="d"
-        Title="FoodDiary" Height="600" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="FoodDiary" Height="650" Width="950" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="/Images/Userthem1.jpg"/>
     </Window.Background>
@@ -40,7 +40,7 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Canvas.RenderTransform>
-            <lvc:PieChart x:Name="Pie_chart" LegendLocation="Bottom"  Hoverable="False" DataTooltip="{x:Null}" Canvas.Left="195" Height="175" Width="276" Loaded="Charts_Loaded" AutomationProperties.IsRequiredForForm="True" Foreground="White" ScrollBarFill="#1E443131" Canvas.Top="9">
+            <lvc:PieChart x:Name="Pie_chart" LegendLocation="Bottom"  Hoverable="False" DataTooltip="{x:Null}" Canvas.Left="187" Height="175" Width="276" Loaded="Charts_Loaded" AutomationProperties.IsRequiredForForm="True" Foreground="White" ScrollBarFill="#1E443131" Canvas.Top="9">
                 <lvc:PieChart.Series>
                     <lvc:PieSeries x:Name="part_green"    Title="Lean body mass"  Values="0"  DataLabels="True" Foreground="#FFFFFEFC">
                         <lvc:PieSeries.Fill>
@@ -56,7 +56,7 @@
             </lvc:PieChart>
             <lvc:Gauge x:Name="half_dounat_chart"
                        From="0" To="100" Value="00"
-                    LabelsVisibility="Collapsed" Height="118" Width="288" RenderTransformOrigin="0.5,0.5" Canvas.Left="-99" Canvas.Top="55" Foreground="White">
+                    LabelsVisibility="Collapsed" Height="118" Width="288" RenderTransformOrigin="0.5,0.5" Canvas.Left="-97" Canvas.Top="73" Foreground="White">
                 <lvc:Gauge.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -73,7 +73,7 @@
                     </LinearGradientBrush>
                 </lvc:Gauge.GaugeActiveFill>
             </lvc:Gauge>
-            <Label Content="Daily calories in %" Height="34" FontSize="22" FontFamily="Century Gothic" Canvas.Left="-55" Canvas.Top="11" Width="200" Foreground="White"/>
+            <Label Content="Daily calories in %" Height="34" FontSize="22" FontFamily="Century Gothic" Canvas.Left="-53" Canvas.Top="29" Width="200" Foreground="White"/>
         </Canvas>
         <Canvas RenderTransformOrigin="1.917,4.381" Margin="14,4,449,15" Grid.Row="2" Grid.ColumnSpan="4">
             <Line
@@ -103,7 +103,19 @@
                 </Line.Stroke>
             </Line>
         </Canvas>
+        <Canvas Grid.Column="2"  Grid.Row="4" >
+            <lvc:CartesianChart x:Name="linechart"  LegendLocation="Right" Canvas.Top="141" Height="232" Width="547" FontSize="12" Foreground="White" FontFamily="Century Gothic" Canvas.Left="10" >
+                <lvc:CartesianChart.AxisY >
+                    <lvc:Axis Title="Kcal" FontSize="15"  LabelFormatter="{Binding YFormatter}" FontWeight="Medium" FontFamily="Century Gothica" Foreground="White"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis x:Name="axisX" Title="Date" Foreground="White" FontSize="15" ></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+            <DatePicker x:Name="data_od" CalendarClosed="data_od_CalendarClosed" Canvas.Top="188" Canvas.Left="-130"/>
+            <DatePicker x:Name="data_do" CalendarClosed="data_od_CalendarClosed" Canvas.Top="241" Canvas.Left="-130"/>
+        </Canvas>
         <Label Content="Food Diary" HorizontalAlignment="Left" VerticalAlignment="Top" Height="81" Grid.Column="2"  FontSize="55" FontFamily="Century Gothic"  Foreground="White"  Margin="147,10,0,0" Width="311"/>
-        <Label Content="Body composition in Kg" FontSize="22" FontFamily="Century Gothic" RenderTransformOrigin="1.093,-0.182" Margin="333,7,-117,-31" Grid.Row="7" Grid.Column="2" Foreground="White"/>
+        <Label Content="Body composition in Kg" FontSize="22" FontFamily="Century Gothic" RenderTransformOrigin="1.093,-0.182" Margin="325,7,-109,-31" Grid.Row="7" Grid.Column="2" Foreground="White"/>
     </Grid>
 </Window>

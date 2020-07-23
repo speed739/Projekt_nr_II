@@ -28,11 +28,29 @@ namespace Dziennik_Żywieniowy
         UserName_model user_model = new UserName_model();
         private double LBM, Fat;
         int helper = 0; // zmienna pomocnicza do wyswietlania tylko pojedyńczego komunikatu 
+        public Func<double, string> YFormatter { get; set; }
+        int id_diary,range; //zmienna okreslajaca okres czasu pokazany na wykresie
+        SqlQueries queries = new SqlQueries();
+
         public UserWindow()
         {
             InitializeComponent();
             username.Content = Global_Methods.username;
             user_model = user_model.Return_info(Global_Methods.username);
+            id_diary = queries.ReturnUserIDdiary(user_model.ID_User);
+            CalculateStartAndEndDate();
+            RefreshChart();
+        }
+
+        private void CalculateStartAndEndDate()
+        {
+            data_od.DisplayDateStart = queries.CalculateStartDate(id_diary);
+            data_od.DisplayDateEnd = queries.CalculateEndDate(id_diary);
+            data_do.DisplayDateStart = data_od.DisplayDateStart;
+            data_do.DisplayDateEnd = data_od.DisplayDateEnd;
+           
+            data_od.SelectedDate = data_od.DisplayDateStart;
+            data_do.SelectedDate = data_do.DisplayDateEnd;
         }
         private void UpdatePie_ChartValues(EnumSex sex)
         {
@@ -103,9 +121,9 @@ namespace Dziennik_Żywieniowy
             add_Product.ShowDialog();
             half_dounat_chart.Value = (double)Global_Methods.chartvalue * 100;
             half_dounat_chart.Value = Convert.ToDouble(String.Format("{0:0.#}", half_dounat_chart.Value));
+            RefreshChart();
             CompleatDaily();
         }
-
         private void diary_Click(object sender, RoutedEventArgs e)
         {
             Diary diary = new Diary();
@@ -119,6 +137,54 @@ namespace Dziennik_Żywieniowy
                 helper = 1;
                 MessageBox.Show("Congratulation !!!  today your daily calories are compleat ", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+        private ChartValues<double> LoadValuesToLineChart()
+        {
+            CalculateRange();
+            ChartValues<double> values = new ChartValues<double>();
+
+            if (range < 1)
+            {
+                data_od.SelectedDate = data_od.SelectedDate.Value.Date.AddDays(range - 1);
+                CalculateRange();
+            }
+            if (range > 0)
+            {
+                string[] Labels = new string[range];
+                for (int i = 0; i < range; i++)
+                {
+                    double result = queries.CalculateKcal(id_diary, data_od.SelectedDate.Value.AddDays(i));
+                    Labels[i] = data_od.SelectedDate.Value.AddDays(i).ToShortDateString();
+                    values.Add(result);
+                    DB.Connection_Close(DB.Connection());
+
+                }
+                axisX.Labels = Labels;
+            }
+            return values;
+        }
+        private void CalculateRange()
+        {
+            range = data_do.SelectedDate.Value.Day - data_od.SelectedDate.Value.Day + 1;
+        }
+        private void RefreshChart()
+        {
+            SeriesCollection SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Eaten calories",
+                    Values  = LoadValuesToLineChart()
+
+                }
+            };
+            YFormatter = value => value.ToString();
+            linechart.Series = SeriesCollection;
+            DataContext = this;
+        }
+        private void data_od_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            RefreshChart();
         }
     }
 }

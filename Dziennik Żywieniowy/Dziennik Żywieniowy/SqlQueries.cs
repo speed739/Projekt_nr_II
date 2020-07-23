@@ -179,5 +179,55 @@ namespace Dziennik_Żywieniowy
             DB.Connection_Close(DB.Connection());
             MessageBox.Show("Updating product - " + old_productname + " is compleat", "FoodDiary", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        public double CalculateKcal(int id_diary, DateTime date)
+        {
+            double result = 0;
+            string sql = "Select SUM(Kcal) From DiaryDetails WHERE AddData = @data AND ID_Diary = @id_diary";
+            SqlCommand command = new SqlCommand(sql, DB.Connection());
+            command.Parameters.AddWithValue("@id_diary", id_diary);
+            command.Parameters.AddWithValue("@data", date);
+
+            if (!Convert.IsDBNull(command.ExecuteScalar()))
+            {
+                return result = Convert.ToDouble(command.ExecuteScalar());
+            }
+            else
+            {
+                return result = 0;
+            }
+        }
+        public DateTime CalculateStartDate(int user_id)
+        {
+            DateTime result;
+            string sql = "Select MIN(AddData) From DiaryDetails WHERE ID_Diary = @user_id";
+            SqlCommand command = new SqlCommand(sql, DB.Connection());
+            command.Parameters.AddWithValue("@user_id", user_id);
+
+            if (!Convert.IsDBNull(command.ExecuteScalar()))
+            {
+                return result = Convert.ToDateTime(command.ExecuteScalar());
+            }
+            else
+            {
+                return result = DateTime.Today;
+            }
+        }
+        public DateTime CalculateEndDate(int user_id)
+        {
+            DateTime result;
+            string sql = "Select MAX(AddData) From DiaryDetails WHERE ID_Diary = @user_id";
+            SqlCommand command = new SqlCommand(sql, DB.Connection());
+            command.Parameters.AddWithValue("@user_id", user_id);
+
+            if (!Convert.IsDBNull(command.ExecuteScalar()))
+            {
+                return result = Convert.ToDateTime(command.ExecuteScalar());
+            }
+            else
+            {
+                return result = DateTime.Today;
+            }
+        }
     }
 }
